@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {
   HttpClient,
   HttpErrorResponse,
+  HttpHeaders,
   HttpStatusCode,
 } from '@angular/common/http';
 import { environment } from '../../environments/environment';
@@ -34,4 +35,5 @@ export class UsersService {
   getAll() {
     return this.http.get<User[]>(this.URI);
   }
+
 }
