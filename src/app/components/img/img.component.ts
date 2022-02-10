@@ -13,7 +13,6 @@ export class ImgComponent {
   @Input('img')
   set imgSet(img: string) {
     this.img = img;
-    console.log('set img');
   }
   @Output() loaded = new EventEmitter<string>();
   imgDefault = './assets/img/default.png';

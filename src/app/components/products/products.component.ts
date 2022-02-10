@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import {
   Product,
   CreateProductDTO,
@@ -13,28 +13,28 @@ import { switchMap, zip } from 'rxjs';
   templateUrl: './products.component.html',
   styleUrls: ['./products.component.scss'],
 })
-export class ProductsComponent implements OnInit {
+export class ProductsComponent {
   myShoppingCart: Product[] = [];
   total = 0;
-  products: Product[] = [];
+  @Input() products: Product[] = [];
+  // @Input() productId: string | null = null;
+  @Input() set productId(id: string | null) {
+    if (id) {
+      this.showDetail(Number(id));
+    }
+  }
+  @Output() loadMore = new EventEmitter<Boolean>();
   today = new Date();
   date = new Date(2022, 1, 22);
   showProductDetail = false;
   productChosen!: Product;
   statusDetail: 'loading' | 'success' | 'error' | 'init' = 'init';
 
-  limit = 10;
-  offset = 0;
-
   constructor(
     private storeService: StoreService,
     private productService: ProductsService
   ) {
     this.myShoppingCart = this.storeService.getShoppingCart();
-  }
-
-  ngOnInit(): void {
-    this.loadProducts();
   }
 
   onAddToShoppingCard(product: Product) {
@@ -55,16 +55,14 @@ export class ProductsComponent implements OnInit {
   }
 
   showDetailOk(product: Product) {
-    this.toogleProductDetail();
+    if (!this.showProductDetail) {
+      this.showProductDetail = true;
+    }
     this.productChosen = product;
     this.statusDetail = 'success';
   }
 
   showDetailError(error: Error) {
-    console.log(
-      '🚀 ~ file: products.component.ts ~ line 57 ~ ProductsComponent ~ showDetail ~ errorMsg',
-      error.message
-    );
     this.statusDetail = 'error';
   }
 
@@ -145,16 +143,7 @@ export class ProductsComponent implements OnInit {
     });
   }
 
-  loadProducts() {
-    this.productService
-      .getAll(this.limit, this.offset)
-      .subscribe((products) => {
-        this.products = [...this.products, ...products];
-      });
-  }
-
-  loadMoreProducts() {
-    this.offset += this.limit;
-    this.loadProducts();
+  onLoadMore() {
+    this.loadMore.emit();
   }
 }

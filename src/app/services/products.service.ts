@@ -18,7 +18,7 @@ import { checkTime } from '../interceptors/time.interceptor';
   providedIn: 'root',
 })
 export class ProductsService {
-  private URI = `${environment.API_URL}/api/v1/products`;
+  private URI = `${environment.API_URL}/api/v1`;
 
   constructor(private http: HttpClient) {}
 
@@ -29,7 +29,7 @@ export class ProductsService {
       params = params.set('offset', offset.toString());
     }
     return this.http
-      .get<Product[]>(this.URI, { params, context: checkTime() })
+      .get<Product[]>(`${this.URI}/products`, { params, context: checkTime() })
       .pipe(
         retry(3),
         map((products) =>
@@ -42,6 +42,17 @@ export class ProductsService {
         )
       );
   }
+
+  getByCategory(id: number, limit?: number, offset?: number) {
+    let params = new HttpParams();
+    if (limit !== undefined && offset !== undefined) {
+      params = params.set('limit', limit.toString());
+      params = params.set('offset', offset.toString());
+    }
+    return this.http
+      .get<Product[]>(`${this.URI}/categories/${id}/products`, { params })
+      .pipe(retry(3));
+  }
   /*
   getByPage(limit: number, offset: number) {
     return this.http.get<Product[]>(`${this.URI}`, {
@@ -53,7 +64,7 @@ export class ProductsService {
   } */
 
   getOne(id: number) {
-    return this.http.get<Product>(`${this.URI}/${id}`).pipe(
+    return this.http.get<Product>(`${this.URI}/products/${id}`).pipe(
       catchError((error: HttpErrorResponse) => {
         if (error.status === HttpStatusCode.InternalServerError) {
           return throwError(() => new Error('Error con el servidor'));
@@ -67,14 +78,14 @@ export class ProductsService {
   }
 
   create(product: CreateProductDTO) {
-    return this.http.post<Product>(this.URI, product);
+    return this.http.post<Product>(`${this.URI}/products`, product);
   }
 
   update(id: number, product: UpdateProductDTO) {
-    return this.http.put<Product>(`${this.URI}/${id}`, product);
+    return this.http.put<Product>(`${this.URI}/products/${id}`, product);
   }
 
   delete(id: number) {
-    return this.http.delete(`${this.URI}/${id}`);
+    return this.http.delete(`${this.URI}/products/${id}`);
   }
 }

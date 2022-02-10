@@ -13,10 +13,11 @@
   <app-product
     (addedProduct)="onAddToShoppingCard($event)"
     [product]="product"
+
     (showDetailEvent)="showDetail($event)"
     *ngFor="let product of products"
   ></app-product>
-  <button (click)="loadMoreProducts()">LoadMoreProducts</button>
+  <button (click)="onLoadMore()">LoadMoreProducts</button>
 </div>
 
 <div class="product-detail" [class.active]="showProductDetail">
