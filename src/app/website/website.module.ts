@@ -14,6 +14,7 @@ import { RegisterComponent } from './pages/register/register.component';
 import { LoginComponent } from './pages/login/login.component';
 import { MycartComponent } from './pages/mycart/mycart.component';
 import { LayoutComponent } from './components/layout/layout.component';
+import { QuicklinkModule } from 'ngx-quicklink';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,12 @@ import { LayoutComponent } from './components/layout/layout.component';
     MycartComponent,
     LayoutComponent,
   ],
-  imports: [CommonModule, WebsiteRoutingModule, SwiperModule, SharedModule],
+  imports: [
+    CommonModule,
+    WebsiteRoutingModule,
+    SwiperModule,
+    SharedModule,
+    QuicklinkModule,
+  ],
 })
 export class WebsiteModule {}
