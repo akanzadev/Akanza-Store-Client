@@ -4,6 +4,7 @@ import { AuthService } from '../../../services/auth.service';
 import { User } from '../../../models/auth.model';
 import { CategoriesService } from '../../../services/categories.service';
 import { Category } from './../../../models/category.model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-nav',
@@ -13,13 +14,14 @@ import { Category } from './../../../models/category.model';
 export class NavComponent implements OnInit {
   activeMenu = false;
   counter = 0;
-  profile!: User;
+  profile!: User | null;
   categories!: Category[];
 
   constructor(
     private storeService: StoreService,
     private authService: AuthService,
-    private categoryService: CategoriesService
+    private categoryService: CategoriesService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -27,6 +29,9 @@ export class NavComponent implements OnInit {
       this.counter = products.length;
     });
     this.getAllCategories();
+    this.authService.user$.subscribe((user) => {
+      this.profile = user;
+    });
   }
 
   toggleMenu() {
@@ -43,12 +48,17 @@ export class NavComponent implements OnInit {
         this.profile = profile;
       },
     }); */
-    this.authService
+    /*   this.authService
       .loginAndGetProfile('admin@gmail.com', '123456789')
       .subscribe({
         next: (profile) => {
           this.profile = profile;
         },
+      }); */
+    this.authService
+      .loginAndGetProfile('akanzaakamaru@gmail.com', '12345')
+      .subscribe({
+        next: (profile) => this.router.navigate(['/profile']),
       });
   }
 
@@ -58,5 +68,10 @@ export class NavComponent implements OnInit {
         this.categories = categories;
       },
     });
+  }
+  logout() {
+    this.authService.logout();
+    this.profile = null;
+    this.router.navigate(['/']);
   }
 }

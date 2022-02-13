@@ -7,7 +7,7 @@ import {
   HttpStatusCode,
 } from '@angular/common/http';
 import { Auth, User } from '../models/auth.model';
-import { catchError, throwError, pipe, tap, switchMap } from 'rxjs';
+import { catchError, throwError, tap, switchMap, BehaviorSubject } from 'rxjs';
 import { TokenService } from './token.service';
 
 @Injectable({
@@ -15,6 +15,9 @@ import { TokenService } from './token.service';
 })
 export class AuthService {
   private URI = `${environment.API_URL}/api/v1/auth`;
+
+  private user = new BehaviorSubject<User | null>(null);
+  user$ = this.user.asObservable();
 
   constructor(private http: HttpClient, private tokenService: TokenService) {}
 
@@ -56,10 +59,16 @@ export class AuthService {
     });
   }*/
   getProfile() {
-    return this.http.get<User>(`${this.URI}/profile`);
+    return this.http
+      .get<User>(`${this.URI}/profile`)
+      .pipe(tap((user) => this.user.next(user)));
   }
 
   loginAndGetProfile(email: string, password: string) {
     return this.login(email, password).pipe(switchMap(() => this.getProfile()));
+  }
+
+  logout() {
+    this.tokenService.removeToken();
   }
 }

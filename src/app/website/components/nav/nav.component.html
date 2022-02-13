@@ -43,7 +43,8 @@
           Login
         </button>
         <ng-template #elseBlock>
-          {{ profile?.email }}
+          <a routerLink="profile"> {{ profile?.email }}</a>
+          <button (click)="logout()">LogOut</button>
         </ng-template>
       </div>
       <div class="cart">
