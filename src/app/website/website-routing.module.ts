@@ -11,6 +11,9 @@ import { RecoveryComponent } from './pages/recovery/recovery.component';
 import { ProfileComponent } from './pages/profile/profile.component';
 import { RegisterComponent } from './pages/register/register.component';
 import { ExitGuard } from '../guards/exit.guard';
+import { MessageComponent } from './pages/message/message.component';
+import { RecoveryFormComponent } from './pages/recovery-form/recovery-form.component';
+import { ChangePasswordComponent } from './pages/change-password/change-password.component';
 
 const routes: Routes = [
   {
@@ -48,6 +51,22 @@ const routes: Routes = [
       {
         path: 'recovery',
         component: RecoveryComponent,
+        canActivate: [!AuthGuard],
+        children: [
+          {
+            path: '',
+            component: RecoveryFormComponent,
+          },
+          {
+            path: 'message',
+
+            component: MessageComponent,
+          },
+          {
+            path: 'change-password',
+            component: ChangePasswordComponent,
+          },
+        ],
       },
       {
         path: 'profile',

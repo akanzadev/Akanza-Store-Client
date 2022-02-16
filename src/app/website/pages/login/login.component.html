@@ -1,1 +1,83 @@
-<p>login works!</p>
+<section class="login">
+  <div class="login-container">
+    <div class="login-logo">
+      <div class="close-login"></div>
+      <figure>
+        <source
+          srcset="assets/svg/logo_yard_sale.svg"
+          media="(min-width: 768px)"
+        />
+        <source
+          srcset="assets/svg/logo_yard_sale.svg"
+          media="(max-width: 767px)"
+        />
+        <img src="assets/svg/logo_yard_sale.svg" alt="Logo login" />
+      </figure>
+    </div>
+    <form class="login-form" (ngSubmit)="onSubmit()" [formGroup]="userForm">
+      <div class="login-form-group">
+        <label
+          *ngIf="
+            !(userForm.get('email')?.errors && userForm.get('email')?.touched)
+          "
+          for="email"
+          >Email address</label
+        >
+        <label *ngIf="validateEmail('email')" for="email" class="error"
+          >Enter a valid email address</label
+        >
+        <label *ngIf="validateRequired('email')" for="email" class="error"
+          >Email is Required</label
+        >
+        <input
+          name="email"
+          type="email"
+          formControlName="email"
+          id="email"
+          placeholder="camilayokoo@gmail.com"
+        />
+      </div>
+      <div class="login-form-group">
+        <label
+          *ngIf="
+            !(
+              userForm.get('password')?.errors &&
+              userForm.get('password')?.touched
+            )
+          "
+          for="password"
+          >Password</label
+        >
+        <label
+          *ngIf="
+          userForm.get('password')?.touched && userForm.get('password')?.errors?.['minlength']
+        "
+          for="password"
+          class="error"
+          >The password must contain at least 6 characters</label
+        >
+        <label *ngIf="validateRequired('password')" for="password" class="error"
+          >Password is Required</label
+        >
+        <input
+          name="password"
+          type="password"
+          id="password"
+          formControlName="password"
+          placeholder="*********"
+        />
+      </div>
+      <div class="login-form-group">
+        <button class="login-form-group__log-in" type="submit">Log In</button>
+      </div>
+      <div class="login-form-group">
+        <a [routerLink]="['/recovery']" routerLinkActive="active"
+          >Forgot my password</a
+        >
+      </div>
+      <div class="login-form-group">
+        <button class="login-form-group__sign-up" type="submit">Sign Up</button>
+      </div>
+    </form>
+  </div>
+</section>

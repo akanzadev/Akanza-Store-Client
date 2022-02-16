@@ -39,12 +39,12 @@
     </nav>
     <div class="info">
       <div class="account">
-        <button *ngIf="!profile; else elseBlock" (click)="login()">
-          Login
-        </button>
+        <a *ngIf="!profile; else elseBlock" routerLink="/login">
+          Log In
+        </a>
         <ng-template #elseBlock>
           <a routerLink="profile"> {{ profile?.email }}</a>
-          <button (click)="logout()">LogOut</button>
+          <a (click)="logout()">LogOut</a>
         </ng-template>
       </div>
       <div class="cart">

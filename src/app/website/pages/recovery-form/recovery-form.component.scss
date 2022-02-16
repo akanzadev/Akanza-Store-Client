@@ -5,44 +5,54 @@ $black: #000000;
 $hospital-green: #acd9b2;
 $dark: #232830;
 $plomo: #797979;
+$plomo-light: #fafafa;
 $red: #d25050;
-.login {
+.recovery {
   height: 100%;
   width: 100%;
 }
 
-.login-container {
+.recovery-container {
   width: 100%;
   display: flex;
-  padding: 20px 20px;
+  padding: 0px 20px;
   flex-wrap: wrap;
   flex-direction: column;
   align-items: center;
-  .login-logo {
+  .recovery-logo {
     width: 100%;
-    padding: 60px 0px 45px 0px;
-    position: relative;
-    .close-login {
-      position: absolute;
-      top: 0px;
-      right: 0px;
-      cursor: pointer;
-      width: 15px;
-      height: 15px;
-      background: url(/assets/svg/close-login.svg) no-repeat center;
-      background-size: contain;
-    }
+    padding: 80px 0px;
     figure {
       text-align: center;
       img {
-        width: 205.45px;
+        width: 148.12px;
         height: auto;
       }
     }
   }
-  .login-form {
+  .recovery-header {
+    text-align: center;
+    padding: 10px 0px;
+    width: 80%;
+    margin: auto;
+    h1 {
+      font-weight: 700;
+      font-size: 18px;
+      line-height: 22.5px;
+      color: $black;
+      padding-bottom: 15px;
+    }
+    p {
+      font-weight: 4000;
+      color: $plomo;
+      line-height: 22.5px;
+      font-size: 18px;
+      padding-bottom: 20px;
+    }
+  }
+  .recovery-form {
     width: 100%;
-    .login-form-group {
+    .recovery-form-group {
       display: flex;
       flex-direction: column;
       margin-bottom: 25px;
@@ -56,8 +66,7 @@ $red: #d25050;
           color: $red;
         }
       }
-      input[type="email"],
-      input[type="password"] {
+      input[type="email"] {
         background: $text-input-field;
         padding: 10px 8px;
         border: 1px solid $text-input-field;
@@ -70,6 +79,7 @@ $red: #d25050;
       }
       button {
         padding: 18px 0px;
+        background: $hospital-green;
         border: 1px solid $hospital-green;
         box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.0001);
         border-radius: 10px;
@@ -77,28 +87,7 @@ $red: #d25050;
         font-weight: bold;
         font-size: 18px;
         line-height: 22px;
-        cursor: pointer;
-      }
-      button.login-form-group__log-in {
-        background: $hospital-green;
         color: #ffffff;
-        &:hover {
-          color: $hospital-green;
-          background: #ffffff;
-        }
-        &:disabled {
-          background: $very-light-pink;
-          color: $black;
-        }
-      }
-      button.login-form-group__sign-up {
-        margin-top: 220px;
-        color: $hospital-green;
-        background: #ffffff;
-        &:hover {
-          background: $hospital-green;
-          color: #ffffff;
-        }
       }
       a {
         font-style: normal;

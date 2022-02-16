@@ -38,7 +38,7 @@ export class NavComponent implements OnInit {
     this.activeMenu = !this.activeMenu;
   }
 
-  login() {
+  signIn() {
     /*  zip(
       this.authService.login('admin@gmail.com', '123456789'),
       this.authService.getProfile(this.token)

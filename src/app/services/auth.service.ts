@@ -64,6 +64,19 @@ export class AuthService {
       .pipe(tap((user) => this.user.next(user)));
   }
 
+  changePassword(token: string, newPassword: string) {
+    return this.http.post<Auth>(`${this.URI}/change-password`, {
+      token,
+      newPassword,
+    });
+  }
+
+  sendEmailForRecovery(email: string) {
+    return this.http.post<Auth>(`${this.URI}/recovery`, {
+      email,
+    });
+  }
+
   loginAndGetProfile(email: string, password: string) {
     return this.login(email, password).pipe(switchMap(() => this.getProfile()));
   }
