@@ -83,5 +83,6 @@ export class AuthService {
 
   logout() {
     this.tokenService.removeToken();
+    this.user.next(null);
   }
 }

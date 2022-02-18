@@ -16,7 +16,6 @@ import { LoginComponent } from './pages/login/login.component';
 import { MycartComponent } from './pages/mycart/mycart.component';
 import { LayoutComponent } from './components/layout/layout.component';
 import { QuicklinkModule } from 'ngx-quicklink';
-import { MessageComponent } from './pages/message/message.component';
 import { RecoveryFormComponent } from './pages/recovery-form/recovery-form.component';
 import { ChangePasswordComponent } from './pages/change-password/change-password.component';
 
@@ -31,7 +30,6 @@ import { ChangePasswordComponent } from './pages/change-password/change-password
     LoginComponent,
     MycartComponent,
     LayoutComponent,
-    MessageComponent,
     RecoveryFormComponent,
     ChangePasswordComponent,
   ],

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from '../../../services/auth.service';
 
 interface Passwords {
@@ -19,14 +19,19 @@ export class ChangePasswordComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private activeRoute: ActivatedRoute,
-    private authService: AuthService
+    private authService: AuthService,
+    private router: Router
   ) {
     this.buildForm();
   }
 
   ngOnInit(): void {
     this.activeRoute.queryParamMap.subscribe((params) => {
-      this.token = params.get('token');
+      if (params.get('token')) {
+        this.token = params.get('token');
+      } else {
+        this.router.navigate(['/login']);
+      }
     });
   }
   private buildForm() {

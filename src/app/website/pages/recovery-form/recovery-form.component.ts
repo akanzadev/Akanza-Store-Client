@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../../../services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-recovery-form',
@@ -9,10 +10,12 @@ import { AuthService } from '../../../services/auth.service';
 })
 export class RecoveryFormComponent implements OnInit {
   recoveryForm!: FormGroup;
-
+  sendCheck: boolean = false;
+  goBackSend:boolean = false;
   constructor(
     private formBuild: FormBuilder,
-    private authService: AuthService
+    private authService: AuthService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -28,6 +31,7 @@ export class RecoveryFormComponent implements OnInit {
         .subscribe({
           next: () => {
             console.log('Email sent');
+            this.sendCheck = true;
           },
           error: (err) => {
             alert(err.error.message);
@@ -49,5 +53,12 @@ export class RecoveryFormComponent implements OnInit {
       this.recoveryForm.get(name)?.touched &&
       this.recoveryForm.get(name)?.hasError('email')
     );
+  }
+  goToLogin() {
+    this.router.navigate(['/login']);
+  }
+
+  resendEmail(){
+    this.goBackSend = true;
   }
 }

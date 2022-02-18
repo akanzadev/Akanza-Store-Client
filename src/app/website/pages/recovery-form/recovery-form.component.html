@@ -1,57 +1,129 @@
-<section class="recovery">
-  <div class="recovery-container">
-    <div class="recovery-logo">
-      <figure>
-        <source
-          srcset="assets/svg/logo_yard_sale.svg"
-          media="(min-width: 768px)"
-        />
-        <source
-          srcset="assets/svg/logo_yard_sale.svg"
-          media="(max-width: 767px)"
-        />
-        <img src="assets/svg/logo_yard_sale.svg" alt="Logo Recovery" />
-      </figure>
-    </div>
-    <div class="recovery-header">
-      <h1>Password recovery</h1>
-      <p>Inform the email address used to create your account</p>
-    </div>
-    <form
-      class="recovery-form"
-      (ngSubmit)="onSubmit()"
-      [formGroup]="recoveryForm"
+<div class="container">
+  <section class="recovery">
+    <div
+      class="left-container"
+      [ngClass]="{
+        'animation-theme': sendCheck,
+        'animation-theme-back': goBackSend
+      }"
     >
-      <div class="recovery-form-group">
-        <label
-          *ngIf="
-            !(
-              recoveryForm.get('email')?.errors &&
-              recoveryForm.get('email')?.touched
-            )
-          "
-          for="email"
-          >Email address</label
+      <div class="recovery-container">
+        <div class="recovery-logo">
+          <figure>
+            <source
+              srcset="assets/svg/logo_yard_sale.svg"
+              media="(min-width: 768px)"
+            />
+            <source
+              srcset="assets/svg/logo_yard_sale.svg"
+              media="(max-width: 767px)"
+            />
+            <img src="assets/svg/logo_yard_sale.svg" alt="Logo Recovery" />
+          </figure>
+        </div>
+        <div class="recovery-header">
+          <h1>Password recovery</h1>
+          <p>Inform the email address used to create your account</p>
+        </div>
+        <form
+          class="recovery-form"
+          (ngSubmit)="onSubmit()"
+          [formGroup]="recoveryForm"
         >
-        <label *ngIf="validateEmail('email')" for="email" class="error"
-          >Enter a valid email address</label
-        >
-        <label *ngIf="validateRequired('email')" for="email" class="error"
-          >Email is Required</label
-        >
-        <input
-          type="email"
-          id="email"
-          placeholder="camilayokoo@gmail.com"
-          formControlName="email"
-        />
+          <div class="recovery-form-group">
+            <label
+              *ngIf="
+                !(
+                  recoveryForm.get('email')?.errors &&
+                  recoveryForm.get('email')?.touched
+                )
+              "
+              for="email"
+              >Email address</label
+            >
+            <label *ngIf="validateEmail('email')" for="email" class="error"
+              >Enter a valid email address</label
+            >
+            <label *ngIf="validateRequired('email')" for="email" class="error"
+              >Email is Required</label
+            >
+            <input
+              type="email"
+              id="email"
+              placeholder="camilayokoo@gmail.com"
+              formControlName="email"
+            />
+          </div>
+          <div *ngIf="!goBackSend" class="recovery-form-group">
+            <button type="submit">Submit</button>
+          </div>
+          <div *ngIf="goBackSend" class="recovery-form-group">
+            <button type="submit">ReSubmit</button>
+          </div>
+          <div class="recovery-form-group">
+            <a [routerLink]="['/login']" routerLinkActive="active"
+              >Back to login</a
+            >
+          </div>
+        </form>
       </div>
-      <div class="recovery-form-group">
-        <button type="submit">Submit</button>
+    </div>
+    <div
+      class="rigth-container"
+      [ngClass]="{
+        'animation-theme-2': sendCheck,
+        'animation-theme-back-2': goBackSend
+      }"
+    >
+      <div class="recovery-check-container">
+        <div class="recovery-check-logo">
+          <figure>
+            <source
+              srcset="assets/svg/logo_yard_sale.svg"
+              media="(min-width: 768px)"
+            />
+            <source
+              srcset="assets/svg/logo_yard_sale.svg"
+              media="(max-width: 767px)"
+            />
+            <img src="assets/svg/logo_yard_sale.svg" alt="Logo YARD Sale" />
+          </figure>
+        </div>
+        <div class="recovery-check-header">
+          <h1>Email has been sent!</h1>
+          <p>
+            Please check your inbox for instructions on how to reset the
+            password
+          </p>
+        </div>
+        <div class="recovery-check-confirm">
+          <div class="recovery-check-confirm-group">
+            <figure>
+              <source
+                srcset="assets/svg/recovery-message.svg"
+                media="(min-width: 768px)"
+              />
+              <source
+                srcset="assets/svg/recovery-message.svg"
+                media="(max-width: 767px)"
+              />
+              <img
+                src="assets/svg/recovery-message.svg"
+                alt="Recovery Message"
+              />
+            </figure>
+          </div>
+          <div class="recovery-check-confirm-group">
+            <button type="button" (click)="goToLogin()">Login</button>
+          </div>
+          <div class="recovery-check-confirm-group">
+            <p>
+              Didn´t receive the email?
+              <a (click)="resendEmail()">Resend</a>
+            </p>
+          </div>
+        </div>
       </div>
-      <div class="recovery-form-group">
-        <a [routerLink]="['/login']" routerLinkActive="active">Back to login</a>
-      </div>
-    </form>
-  </div>
-</section>
+    </div>
+  </section>
+</div>

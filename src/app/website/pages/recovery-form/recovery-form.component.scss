@@ -7,11 +7,112 @@ $dark: #232830;
 $plomo: #797979;
 $plomo-light: #fafafa;
 $red: #d25050;
-.recovery {
-  height: 100%;
+.container {
   width: 100%;
+  min-height: 100vh;
+  overflow: hidden;
+}
+.recovery {
+  width: 200%;
+  display: flex;
+  flex-direction: row;
+}
+@keyframes translate-x {
+  0% {
+    transform: translateX(0%);
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+  75% {
+    opacity: 0.2;
+  }
+  100% {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+}
+@keyframes translate-back-x {
+  0% {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  50% {
+    opacity: 0.2;
+  }
+  75% {
+    opacity: 0.5;
+  }
+  100% {
+    transform: translateX(0%);
+    opacity: 1;
+  }
+}
+@keyframes translate-x-2 {
+  0% {
+    transform: translateX(0%);
+    opacity: 0;
+  }
+  50% {
+    opacity: 0.2;
+  }
+  75% {
+    opacity: 0.5;
+  }
+  100% {
+    transform: translateX(-100%);
+    opacity: 1;
+  }
+}
+@keyframes translate-back-x-2 {
+  0% {
+    transform: translateX(-100%);
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+  75% {
+    opacity: 0.2;
+  }
+  100% {
+    transform: translateX(0%);
+    opacity: 0;
+  }
+}
+.animation-theme {
+  animation-name: translate-x;
+  animation-duration: 1500ms;
+  animation-timing-function: ease;
+  animation-fill-mode: forwards;
+}
+.animation-theme-2 {
+  animation-name: translate-x-2;
+  animation-duration: 1500ms;
+  animation-timing-function: ease;
+  animation-fill-mode: forwards;
 }
 
+.animation-theme-back {
+  animation-name: translate-back-x;
+  animation-duration: 1500ms;
+  animation-timing-function: ease;
+  animation-fill-mode: forwards;
+}
+.animation-theme-back-2 {
+  animation-name: translate-back-x-2;
+  animation-duration: 1500ms;
+  animation-timing-function: ease;
+  animation-fill-mode: forwards;
+}
+.left-container {
+  width: 50%;
+}
+
+.rigth-container {
+  width: 50%;
+}
 .recovery-container {
   width: 100%;
   display: flex;
@@ -19,6 +120,10 @@ $red: #d25050;
   flex-wrap: wrap;
   flex-direction: column;
   align-items: center;
+  @media (min-width: 640px) {
+    max-width: 500px;
+    margin: auto;
+  }
   .recovery-logo {
     width: 100%;
     padding: 80px 0px;
@@ -28,13 +133,16 @@ $red: #d25050;
         width: 148.12px;
         height: auto;
       }
+      @media (min-width: 640px) {
+        display: none;
+      }
     }
   }
   .recovery-header {
     text-align: center;
     padding: 10px 0px;
     width: 80%;
-    margin: auto;
+    margin: 0px auto;
     h1 {
       font-weight: 700;
       font-size: 18px;
@@ -86,6 +194,7 @@ $red: #d25050;
         font-style: normal;
         font-weight: bold;
         font-size: 18px;
+        cursor: pointer;
         line-height: 22px;
         color: #ffffff;
       }
@@ -97,6 +206,102 @@ $red: #d25050;
         color: $hospital-green;
         text-decoration: none;
         text-align: center;
+      }
+    }
+  }
+}
+
+.recovery-check-container {
+  width: 100%;
+  display: flex;
+  padding: 0px 20px;
+  flex-wrap: wrap;
+  flex-direction: column;
+  align-items: center;
+  @media (min-width: 640px) {
+    max-width: 500px;
+    margin: auto;
+  }
+  .recovery-check-logo {
+    width: 100%;
+    padding: 80px 0px;
+    figure {
+      text-align: center;
+      img {
+        width: 148.12px;
+        height: auto;
+      }
+      @media (min-width: 640px) {
+        display: none;
+      }
+    }
+  }
+  .recovery-check-header {
+    text-align: center;
+    padding: 10px 0px;
+    width: 100%;
+    margin: auto;
+    h1 {
+      font-weight: 700;
+      font-size: 18px;
+      line-height: 22.5px;
+      color: $black;
+      padding-bottom: 15px;
+    }
+    p {
+      font-weight: 4000;
+      color: $plomo;
+      line-height: 22.5px;
+      font-size: 18px;
+      padding-bottom: 20px;
+    }
+  }
+  .recovery-check-confirm {
+    width: 100%;
+    .recovery-check-confirm-group {
+      display: flex;
+      flex-direction: column;
+      margin-bottom: 25px;
+      padding: 10px 0px 20px 0px;
+      figure {
+        width: 150px;
+        margin: auto;
+        height: 150px;
+        display: flex;
+        background-color: $plomo-light;
+        border-radius: 50%;
+        align-items: center;
+        justify-content: center;
+        img {
+          width: 90px;
+          height: auto;
+        }
+      }
+      button {
+        padding: 18px 0px;
+        background: $hospital-green;
+        border: 1px solid $hospital-green;
+        box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.0001);
+        border-radius: 10px;
+        cursor: pointer;
+        font-style: normal;
+        font-weight: bold;
+        font-size: 18px;
+        line-height: 22px;
+        color: #ffffff;
+      }
+      p {
+        text-align: center;
+        a {
+          font-style: normal;
+          font-weight: 500;
+          font-size: 14px;
+          line-height: 17px;
+          color: $hospital-green;
+          text-decoration: none;
+          text-align: center;
+          cursor: pointer;
+        }
       }
     }
   }
