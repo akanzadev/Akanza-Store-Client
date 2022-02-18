@@ -1,10 +1,34 @@
-<a [routerLink]="['/product', product.id]">
-  <app-img *ngIf="product.images.length > 0" [img]="product.images[0]"></app-img
-></a>
-<h2>{{ product.price | currency: "COP" }}</h2>
-<p>{{ product.name }}</p>
-<p *ngIf="product.taxes">{{ product.taxes | currency: "COP" }}</p>
+<div class="product-container">
+  <a routerLink="." [queryParams]="{ product: product.id }"
+    ><app-img
+      *ngIf="product.images.length > 0"
+      [img]="product.images[0]"
+    ></app-img
+  ></a>
+  <!-- <a [routerLink]="['/product', product.id]">
+    <app-img
+      *ngIf="product.images.length > 0"
+      [img]="product.images[0]"
+    ></app-img>
+</a> -->
+  <div class="product-detail">
+    <h2 class="product-detail__price">{{ product.price | currency }}</h2>
+    <p class="product-detail__name">{{ product.name }}</p>
+    <div
+      *ngIf="!productAdded; else productIsAdded"
+      (click)="onAddToCart()"
+      class="product-detail__add"
+    >
+      <img class="" src="./assets/svg/bt_add_to_cart.svg" alt="logo" />
+    </div>
+    <ng-template #productIsAdded>
+      <div class="product-detail__add">
+        <img class="" src="./assets/svg/bt_added_to_cart.svg" alt="logo" /></div
+    ></ng-template>
+  </div>
+  <!-- <p *ngIf="product.taxes">{{ product.taxes | currency: "COP" }}</p>
 <p appHighlight>{{ product.description }}</p>
-<!-- <button (click)="showDetail()">Ver Detalle</button> -->
-<a routerLink="." [queryParams]="{ product: product.id }">Ver Detalle</a>
-<button (click)="onAddToCart()">Add cart</button>
+<button (click)="showDetail()">Ver Detalle</button>
+     <button (click)="onAddToCart()">Add cart</button>
+ -->
+</div>

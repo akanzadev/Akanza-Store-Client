@@ -2,6 +2,7 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { switchMap, zip } from 'rxjs';
 import { StoreService } from '../../../services/store.service';
 import { ProductsService } from '../../../services/products.service';
+import { Router, ActivatedRoute } from '@angular/router';
 import {
   Product,
   CreateProductDTO,
@@ -19,9 +20,7 @@ export class ProductsComponent {
   @Input() products: Product[] = [];
   // @Input() productId: string | null = null;
   @Input() set productId(id: string | null) {
-    if (id) {
-      this.showDetail(Number(id));
-    }
+    if (id !== 'all') this.showDetail(Number(id));
   }
   @Output() loadMore = new EventEmitter<Boolean>();
   today = new Date();
@@ -32,7 +31,9 @@ export class ProductsComponent {
 
   constructor(
     private storeService: StoreService,
-    private productService: ProductsService
+    private productService: ProductsService,
+    private router: Router,
+    private activatedRoute: ActivatedRoute
   ) {
     this.myShoppingCart = this.storeService.getShoppingCart();
   }
@@ -44,6 +45,11 @@ export class ProductsComponent {
 
   toogleProductDetail() {
     this.showProductDetail = !this.showProductDetail;
+    this.router.navigate([], {
+      relativeTo: this.activatedRoute,
+      queryParams: { product: 'all' },
+      queryParamsHandling: 'merge',
+    });
   }
 
   showDetail(id: number) {

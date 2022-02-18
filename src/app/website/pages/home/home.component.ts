@@ -9,7 +9,7 @@ import { Product } from '../../../models/product.model';
   styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent implements OnInit {
-  limit = 10;
+  limit = 20;
   offset = 0;
   products: Product[] = [];
   productId: string | null = null;

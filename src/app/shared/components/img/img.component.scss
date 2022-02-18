@@ -1,3 +1,19 @@
+.img-container {
+  width: 100%;
+}
 img {
-  max-width: 100%;
+  width: 163px;
+  height: 163px;
+  object-fit: cover;
+  object-position: center;
+
+  @media screen and (min-width: 425px) {
+    width: 190px;
+    height: 190px;
+  }
+
+  @media screen and (min-width: 768px) {
+    width: 216px;
+    height: 216px;
+  }
 }

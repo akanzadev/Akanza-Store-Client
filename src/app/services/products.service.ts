@@ -49,9 +49,10 @@ export class ProductsService {
       params = params.set('limit', limit.toString());
       params = params.set('offset', offset.toString());
     }
-    return this.http
-      .get<Product[]>(`${this.URI}/categories/${id}/products`, { params })
-      .pipe(retry(3));
+    return this.http.get<Product[]>(`${this.URI}/categories/${id}/products`, {
+      params,
+    });
+    /*  .pipe(retry(3)); */
   }
   /*
   getByPage(limit: number, offset: number) {

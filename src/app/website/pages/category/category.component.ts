@@ -1,31 +1,27 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { ProductsService } from '../../../services/products.service';
 import { Product } from '../../../models/product.model';
-import { switchMap } from 'rxjs';
+import { switchMap, catchError, of, Observable } from 'rxjs';
 @Component({
   selector: 'app-category',
-  /* templateUrl: './category.component.html', */
-  template: `<app-products
-    [products]="products"
-    (loadMore)="onLoadMore($event)"
-  ></app-products> `,
+  templateUrl: './category.component.html',
   styleUrls: ['./category.component.scss'],
 })
-export class CategoryComponent implements OnInit {
+export class CategoryComponent implements OnInit, OnDestroy {
   categoryId!: string | null;
 
   products: Product[] = [];
   limit = 2;
   offset = 0;
-
   constructor(
     private route: ActivatedRoute,
-    private productsService: ProductsService
+    private productsService: ProductsService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
-    this.route.paramMap
+    /* this.route.paramMap
       .pipe(
         switchMap((params) => {
           this.categoryId = params.get('id');
@@ -35,6 +31,8 @@ export class CategoryComponent implements OnInit {
               this.limit,
               this.offset
             );
+          } else {
+            this.router.navigate(['/']);
           }
           return [];
         })
@@ -43,15 +41,40 @@ export class CategoryComponent implements OnInit {
         next: (products) => {
           this.products = products;
         },
-        error: (error) => console.log(error),
-      });
+        error: (error) => {
+          console.log(error);
+        },
+      }); */
+    this.route.paramMap.subscribe({
+      next: (params) => {
+        this.categoryId = params.get('id');
+        this.offset = 0;
+        console.log(this.categoryId);
+        if (!this.categoryId) {
+          this.router.navigate(['/']);
+          return;
+        }
+        this.productsService
+          .getByCategory(Number(this.categoryId), this.limit, this.offset)
+          .subscribe({
+            next: (products) => {
+              this.products = products;
+            },
+            error: (error) => {
+              this.products = [];
+            },
+          });
+      },
+    });
   }
 
   loadProducts() {
     this.productsService
       .getByCategory(Number(this.categoryId), this.limit, this.offset)
-      .subscribe((products) => {
-        this.products = [...this.products, ...products];
+      .subscribe({
+        next: (products) => {
+          this.products = [...this.products, ...products];
+        },
       });
   }
 
@@ -63,4 +86,6 @@ export class CategoryComponent implements OnInit {
   onLoadMore(e: Boolean) {
     this.loadMoreProducts();
   }
+
+  ngOnDestroy(): void {}
 }
