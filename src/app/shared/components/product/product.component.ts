@@ -20,6 +20,7 @@ export class ProductComponent {
   }
 
   showDetail() {
+    console.log("Emitiendo")
     this.showDetailEvent.emit(this.product.id);
   }
 }

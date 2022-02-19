@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { ActivatedRoute, ParamMap, Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ProductsService } from '../../../services/products.service';
 import { Product } from '../../../models/product.model';
 import { switchMap, catchError, of, Observable } from 'rxjs';
@@ -8,8 +8,9 @@ import { switchMap, catchError, of, Observable } from 'rxjs';
   templateUrl: './category.component.html',
   styleUrls: ['./category.component.scss'],
 })
-export class CategoryComponent implements OnInit, OnDestroy {
+export class CategoryComponent implements OnInit {
   categoryId!: string | null;
+  productId: string | null = null;
 
   products: Product[] = [];
   limit = 2;
@@ -66,6 +67,13 @@ export class CategoryComponent implements OnInit, OnDestroy {
           });
       },
     });
+    this.route.queryParamMap.subscribe((params) => {
+      const productId = params.get('product');
+      if (!productId) {
+        this.productId = null;
+      }
+      this.productId = productId;
+    });
   }
 
   loadProducts() {
@@ -86,6 +94,4 @@ export class CategoryComponent implements OnInit, OnDestroy {
   onLoadMore(e: Boolean) {
     this.loadMoreProducts();
   }
-
-  ngOnDestroy(): void {}
 }

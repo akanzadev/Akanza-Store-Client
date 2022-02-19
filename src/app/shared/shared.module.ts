@@ -9,6 +9,7 @@ import { ProductsComponent } from './components/products/products.component';
 import { ImgComponent } from './components/img/img.component';
 import { HighlightDirective } from './directives/highlight.directive';
 import { TimeAgoPipe } from './pipes/time-ago.pipe';
+import { LoaderComponent } from './components/loader/loader.component';
 
 @NgModule({
   declarations: [
@@ -18,6 +19,7 @@ import { TimeAgoPipe } from './pipes/time-ago.pipe';
     ProductsComponent,
     ImgComponent,
     HighlightDirective,
+    LoaderComponent,
   ],
   imports: [CommonModule, RouterModule, SwiperModule],
   exports: [
@@ -27,6 +29,7 @@ import { TimeAgoPipe } from './pipes/time-ago.pipe';
     ProductsComponent,
     ImgComponent,
     HighlightDirective,
+    LoaderComponent,
   ],
 })
 export class SharedModule {}

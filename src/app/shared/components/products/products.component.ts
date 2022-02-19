@@ -15,19 +15,20 @@ import {
   styleUrls: ['./products.component.scss'],
 })
 export class ProductsComponent {
-  myShoppingCart: Product[] = [];
-  total = 0;
-  @Input() products: Product[] = [];
-  // @Input() productId: string | null = null;
-  @Input() set productId(id: string | null) {
-    if (id !== 'all') this.showDetail(Number(id));
-  }
-  @Output() loadMore = new EventEmitter<Boolean>();
   today = new Date();
   date = new Date(2022, 1, 22);
   showProductDetail = false;
   productChosen!: Product;
   statusDetail: 'loading' | 'success' | 'error' | 'init' = 'init';
+
+  myShoppingCart: Product[] = [];
+  total = 0;
+  @Input() products: Product[] = [];
+  // @Input() productId: string | null = null;
+  @Input() set productId(id: string | null) {
+    if (id) this.showDetail(Number(id));
+  }
+  @Output() loadMore = new EventEmitter<Boolean>();
 
   constructor(
     private storeService: StoreService,
@@ -44,10 +45,10 @@ export class ProductsComponent {
   }
 
   toogleProductDetail() {
-    this.showProductDetail = !this.showProductDetail;
+    this.showProductDetail = false;
     this.router.navigate([], {
       relativeTo: this.activatedRoute,
-      queryParams: { product: 'all' },
+      queryParams: { product: null },
       queryParamsHandling: 'merge',
     });
   }
