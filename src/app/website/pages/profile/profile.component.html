@@ -1,8 +1,96 @@
-<div *ngIf="user">
-  <h1>My profile</h1>
-  <p>Nombre: {{ user.email }}</p>
-  <p>Role: {{ user.role }}</p>
-  <a *ngIf="user.role === 'admin'" routerLink="/cms">
-    Ir a CMS
-  </a>
+<div class="container-myaccount container" *ngIf="user">
+  <section class="myaccount">
+    <div
+      class="rigth-container"
+      [ngClass]="{
+        'animation-theme-2': sendCheck,
+        'animation-theme-back-2': goBackSend
+      }"
+    >
+      <div class="myaccount-show-container">
+        <div class="myaccount-show-header">
+          <h1>My account</h1>
+        </div>
+        <div class="myaccount-show-body">
+          <div class="myaccount-show-body__name">
+            <h2>Name</h2>
+            <p>{{ user.email }}</p>
+          </div>
+          <div class="myaccount-show-body__email">
+            <h2>Email address</h2>
+            <p>{{ user.email }}</p>
+          </div>
+          <div class="myaccount-show-body__password">
+            <h2>Password</h2>
+            <p>{{ user.email }}</p>
+          </div>
+        </div>
+        <div class="myaccount-show-edit">
+          <button
+            class="myaccount-show-edit-group"
+            type="submit"
+            (click)="SaveChanges()"
+          >
+            Edit
+          </button>
+        </div>
+      </div>
+    </div>
+    <div
+      class="left-container"
+      [ngClass]="{
+        'animation-theme': sendCheck,
+        'animation-theme-back': goBackSend
+      }"
+    >
+      <div class="recovery-container">
+        <div class="recovery-logo"></div>
+        <div class="recovery-header">
+          <h1>Password recovery</h1>
+          <p>Inform the email address used to create your account</p>
+        </div>
+        <!-- <form
+          class="recovery-form"
+          (ngSubmit)="onSubmit()"
+          [formGroup]="recoveryForm"
+        >
+          <div class="recovery-form-group">
+            <label
+              *ngIf="
+                !(
+                  recoveryForm.get('email')?.errors &&
+                  recoveryForm.get('email')?.touched
+                )
+              "
+              for="email"
+              >Email address</label
+            >
+            <label *ngIf="validateEmail('email')" for="email" class="error"
+              >Enter a valid email address</label
+            >
+            <label *ngIf="validateRequired('email')" for="email" class="error"
+              >Email is Required</label
+            >
+            <input
+              type="email"
+              id="email"
+              placeholder="camilayokoo@gmail.com"
+              formControlName="email"
+            />
+          </div>
+          <div *ngIf="!goBackSend" class="recovery-form-group">
+            <button type="submit">Submit</button>
+          </div>
+          <div *ngIf="goBackSend" class="recovery-form-group">
+            <button type="submit">ReSubmit</button>
+          </div>
+          <div class="recovery-form-group">
+            <a [routerLink]="['/login']" routerLinkActive="active"
+              >Back to login</a
+            >
+          </div>
+        </form> -->
+      </div>
+    </div>
+  </section>
 </div>

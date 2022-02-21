@@ -9,6 +9,8 @@ import { User } from '../../../models/auth.model';
 })
 export class ProfileComponent implements OnInit {
   user!: User | null;
+  sendCheck: boolean = false;
+  goBackSend: boolean = false;
   constructor(private authService: AuthService) {}
 
   ngOnInit(): void {
@@ -16,4 +18,5 @@ export class ProfileComponent implements OnInit {
       this.user = user;
     });
   }
+  SaveChanges() {}
 }

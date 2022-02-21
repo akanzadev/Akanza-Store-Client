@@ -18,12 +18,18 @@ export class AppComponent implements OnInit {
     private authService: AuthService,
     private filesService: FilesService,
     private tokenService: TokenService
-  ) {}
+  ) {
+    console.log('PRIMI');
+  }
 
   ngOnInit(): void {
     const token = this.tokenService.getToken();
     if (token) {
-      this.authService.getProfile().subscribe();
+      this.authService.getProfile().subscribe({
+        next: (user) => {
+          console.log(user);
+        },
+      });
     }
   }
 

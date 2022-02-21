@@ -1,0 +1,285 @@
+$very-light-pink: #c7c7c7;
+$white: #ffffff;
+$text-input-field: #f7f7f7;
+$black: #000000;
+$hospital-green: #acd9b2;
+$dark: #232830;
+$plomo: #797979;
+$plomo-light: #fafafa;
+$red: #d25050;
+
+@keyframes translate-x {
+  0% {
+    transform: translateX(0%);
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+  75% {
+    opacity: 0.2;
+  }
+  100% {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+}
+@keyframes translate-back-x {
+  0% {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  50% {
+    opacity: 0.2;
+  }
+  75% {
+    opacity: 0.5;
+  }
+  100% {
+    transform: translateX(0%);
+    opacity: 1;
+  }
+}
+@keyframes translate-x-2 {
+  0% {
+    transform: translateX(0%);
+    opacity: 0;
+  }
+  50% {
+    opacity: 0.2;
+  }
+  75% {
+    opacity: 0.5;
+  }
+  100% {
+    transform: translateX(-100%);
+    opacity: 1;
+  }
+}
+@keyframes translate-back-x-2 {
+  0% {
+    transform: translateX(-100%);
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+  75% {
+    opacity: 0.2;
+  }
+  100% {
+    transform: translateX(0%);
+    opacity: 0;
+  }
+}
+.animation-theme {
+  animation-name: translate-x;
+  animation-duration: 1500ms;
+  animation-timing-function: ease;
+  animation-fill-mode: forwards;
+}
+.animation-theme-2 {
+  animation-name: translate-x-2;
+  animation-duration: 1500ms;
+  animation-timing-function: ease;
+  animation-fill-mode: forwards;
+}
+
+.animation-theme-back {
+  animation-name: translate-back-x;
+  animation-duration: 1500ms;
+  animation-timing-function: ease;
+  animation-fill-mode: forwards;
+}
+.animation-theme-back-2 {
+  animation-name: translate-back-x-2;
+  animation-duration: 1500ms;
+  animation-timing-function: ease;
+  animation-fill-mode: forwards;
+}
+.container-myaccount {
+  overflow: hidden;
+}
+.myaccount {
+  width: 200%;
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+}
+.left-container {
+  width: 50%;
+}
+
+.rigth-container {
+  width: 50%;
+}
+.recovery-container {
+  width: 100%;
+  display: flex;
+  padding: 0px 20px;
+  flex-wrap: wrap;
+  flex-direction: column;
+  align-items: center;
+  @media (min-width: 640px) {
+    max-width: 500px;
+    margin: auto;
+  }
+  .recovery-logo {
+    width: 100%;
+    padding: 80px 0px;
+    figure {
+      text-align: center;
+      img {
+        width: 148.12px;
+        height: auto;
+      }
+      @media (min-width: 640px) {
+        display: none;
+      }
+    }
+  }
+  .recovery-header {
+    text-align: center;
+    padding: 10px 0px;
+    width: 80%;
+    margin: 0px auto;
+    h1 {
+      font-weight: 700;
+      font-size: 18px;
+      line-height: 22.5px;
+      color: $black;
+      padding-bottom: 15px;
+    }
+    p {
+      font-weight: 4000;
+      color: $plomo;
+      line-height: 22.5px;
+      font-size: 18px;
+      padding-bottom: 20px;
+    }
+  }
+  .recovery-form {
+    width: 100%;
+    .recovery-form-group {
+      display: flex;
+      flex-direction: column;
+      margin-bottom: 25px;
+      label {
+        color: $black;
+        line-height: 17.5px;
+        font-size: 14px;
+        font-weight: 700;
+        padding-bottom: 10px;
+        &.error {
+          color: $red;
+        }
+      }
+      input[type="email"] {
+        background: $text-input-field;
+        padding: 10px 8px;
+        border: 1px solid $text-input-field;
+        border-radius: 10px;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 16px;
+        line-height: 20px;
+        outline-color: $hospital-green;
+      }
+      button {
+        padding: 18px 0px;
+        background: $hospital-green;
+        border: 1px solid $hospital-green;
+        box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.0001);
+        border-radius: 10px;
+        font-style: normal;
+        font-weight: bold;
+        font-size: 18px;
+        cursor: pointer;
+        line-height: 22px;
+        color: #ffffff;
+      }
+      a {
+        font-style: normal;
+        font-weight: 500;
+        font-size: 14px;
+        line-height: 17px;
+        color: $hospital-green;
+        text-decoration: none;
+        text-align: center;
+      }
+    }
+  }
+}
+
+.myaccount-show-container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  padding: 30px 20px;
+  flex-wrap: wrap;
+  flex-direction: column;
+  height: 100%;
+  align-items: flex-start;
+  @media (min-width: 640px) {
+    max-width: 500px;
+    margin: auto;
+  }
+  .myaccount-show-header {
+    padding: 10px 0px;
+    width: 100%;
+    h1 {
+      font-weight: bold;
+      font-size: 18px;
+      line-height: 22.5px;
+      color: $black;
+      padding-bottom: 15px;
+    }
+  }
+  .myaccount-show-body {
+    padding: 10px 0px;
+    width: 100%;
+    h2 {
+      font-weight: bold;
+      font-size: 14px;
+      color: $black;
+      padding-bottom: 10px;
+    }
+    p {
+      font-weight: 4000;
+      color: $plomo;
+      line-height: 22.5px;
+      font-size: 16px;
+      padding-bottom: 40px;
+    }
+  }
+  .myaccount-show-edit {
+    width: 100%;
+    flex: 1;
+    display: flex;
+    align-items: flex-end;
+    button {
+      width: 100%;
+      padding: 18px 0px;
+      border: 1px solid $hospital-green;
+      box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.0001);
+      border-radius: 10px;
+      font-style: normal;
+      font-weight: bold;
+      font-size: 18px;
+      line-height: 22px;
+      cursor: pointer;
+    }
+    button.myaccount-show-edit-group {
+      color: $hospital-green;
+      background: #ffffff;
+      &:hover {
+        background: $hospital-green;
+        color: #ffffff;
+      }
+      &:disabled {
+        background: $very-light-pink;
+        color: $black;
+      }
+    }
+  }
+}

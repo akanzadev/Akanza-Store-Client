@@ -24,10 +24,15 @@ export class CheckLoginGuard implements CanActivate {
     | boolean
     | UrlTree {
     return this.authServie.user$.pipe(
+      // take last
       take(1),
       map((isLogged) => {
-        if (isLogged) this.router.navigate(['/home']);
-        return !isLogged;
+        console.log('isLogged check login', isLogged);
+        if (isLogged) {
+          this.router.navigate(['/home']);
+          return false;
+        }
+        return true;
       })
     );
   }
