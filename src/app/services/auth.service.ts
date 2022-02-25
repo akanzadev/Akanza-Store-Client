@@ -7,7 +7,14 @@ import {
   HttpStatusCode,
 } from '@angular/common/http';
 import { Auth, User } from '../models/auth.model';
-import { catchError, throwError, tap, switchMap, BehaviorSubject } from 'rxjs';
+import {
+  catchError,
+  throwError,
+  tap,
+  switchMap,
+  BehaviorSubject,
+  of,
+} from 'rxjs';
 import { TokenService } from './token.service';
 
 @Injectable({
@@ -20,13 +27,6 @@ export class AuthService {
   user$ = this.user.asObservable();
 
   constructor(private http: HttpClient, private tokenService: TokenService) {}
-
-  get isLogged() {
-    if (this.tokenService.getToken()) {
-      return true;
-    }
-    return false;
-  }
 
   login(email: string, password: string) {
     return this.http
@@ -91,5 +91,18 @@ export class AuthService {
   logout() {
     this.tokenService.removeToken();
     this.user.next(null);
+  }
+
+  validateToken() {
+    return this.http.get<Auth>(`${this.URI}/validate-token`).pipe(
+      tap((auth) => {
+        this.user.next(auth.user);
+        this.tokenService.saveToken(auth.token);
+      }),
+      catchError(() => {
+        this.logout();
+        return of(null);
+      })
+    );
   }
 }

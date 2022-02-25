@@ -9,7 +9,7 @@ import { TokenService } from './services/token.service';
   template: `<router-outlet></router-outlet>`,
   styleUrls: ['./app.component.scss'],
 })
-export class AppComponent implements OnInit {
+export class AppComponent {
   imgParent = 'https://www.w3schools.com/howto/img_avatar.png';
   token = '';
   imgRta = '';
@@ -19,10 +19,6 @@ export class AppComponent implements OnInit {
     private filesService: FilesService,
     private tokenService: TokenService
   ) {
-    console.log('PRIMI');
-  }
-
-  ngOnInit(): void {
     const token = this.tokenService.getToken();
     if (token) {
       this.authService.getProfile().subscribe({
@@ -32,6 +28,17 @@ export class AppComponent implements OnInit {
       });
     }
   }
+
+  /* ngOnInit(): void {
+     const token = this.tokenService.getToken();
+    if (token) {
+      this.authService.getProfile().subscribe({
+        next: (user) => {
+          console.log(user);
+        },
+      });
+    }
+  }*/
 
   onLoaded(img: string) {
     console.log('loaded padre' + img);

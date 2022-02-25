@@ -20,13 +20,12 @@ export class ProductsComponent {
   showProductDetail = false;
   productChosen!: Product;
   statusDetail: 'loading' | 'success' | 'error' | 'init' = 'init';
-
   myShoppingCart: Product[] = [];
   total = 0;
+
   @Input() products: Product[] = [];
-  // @Input() productId: string | null = null;
   @Input() set productId(id: string | null) {
-    if (id) this.showDetail(Number(id));
+    id ? this.showDetail(Number(id)) : (this.showProductDetail = false);
   }
   @Output() loadMore = new EventEmitter<Boolean>();
 
@@ -62,14 +61,13 @@ export class ProductsComponent {
   }
 
   showDetailOk(product: Product) {
-    if (!this.showProductDetail) {
-      this.showProductDetail = true;
-    }
+    if (!this.showProductDetail) this.showProductDetail = true;
     this.productChosen = product;
     this.statusDetail = 'success';
   }
 
   showDetailError(error: Error) {
+    this.showProductDetail = false;
     this.statusDetail = 'error';
   }
 

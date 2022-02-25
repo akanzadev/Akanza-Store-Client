@@ -1,5 +1,30 @@
 <div *ngIf="show" class="loading-container">
   <div class="loading">
-    <span class="loading-title">Loading...</span>
+    <picture>
+      <source
+        srcset="assets/svg/logo_yard_sale.svg"
+        width="300"
+        media="(min-width: 768px)"
+      />
+      <source
+        srcset="assets/svg/logo_yard_sale.svg"
+        width="250"
+        media="(min-width: 425px)"
+      />
+      <img src="assets/svg/logo_yard_sale.svg" width="200" alt="" />
+    </picture>
+    <picture>
+      <source
+        srcset="assets/svg/loading.svg"
+        width="100"
+        media="(min-width: 768px)"
+      />
+      <source
+        srcset="assets/svg/loading.svg"
+        width="80"
+        media="(min-width: 425px)"
+      />
+      <img src="assets/svg/loading.svg" alt="" width="60" />
+    </picture>
   </div>
 </div>

@@ -5,7 +5,7 @@ import {
   RouterStateSnapshot,
   UrlTree,
 } from '@angular/router';
-import { Observable, take, map } from 'rxjs';
+import { Observable, take, map, tap } from 'rxjs';
 import { AuthService } from '../services/auth.service';
 import { Router } from '@angular/router';
 
@@ -23,7 +23,7 @@ export class CheckLoginGuard implements CanActivate {
     | Promise<boolean | UrlTree>
     | boolean
     | UrlTree {
-    return this.authServie.user$.pipe(
+    /*   return this.authServie.user$.pipe(
       // take last
       take(1),
       map((isLogged) => {
@@ -33,6 +33,13 @@ export class CheckLoginGuard implements CanActivate {
           return false;
         }
         return true;
+      })
+    ); */
+    return this.authServie.validateToken().pipe(
+      map((isLogged) => {
+        if (!isLogged) return true;
+        this.router.navigate(['/home']);
+        return false;
       })
     );
   }

@@ -22,9 +22,6 @@ export class HomeComponent implements OnInit {
     this.loadProducts();
     this.route.queryParamMap.subscribe((params) => {
       const productId = params.get('product');
-      if (!productId) {
-        this.productId = null;
-      }
       this.productId = productId;
     });
   }

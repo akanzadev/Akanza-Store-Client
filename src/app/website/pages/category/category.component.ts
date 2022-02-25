@@ -69,6 +69,7 @@ export class CategoryComponent implements OnInit {
     });
     this.route.queryParamMap.subscribe((params) => {
       const productId = params.get('product');
+      console.log('dasd', productId);
       if (!productId) {
         this.productId = null;
       }

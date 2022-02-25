@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { environment } from './../../environments/environment';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root',
@@ -7,7 +8,7 @@ import { environment } from './../../environments/environment';
 export class TokenService {
   private URI = `${environment.API_URL}/api/v1/users`;
 
-  constructor() {}
+  constructor(private http: HttpClient) {}
 
   saveToken(token: string) {
     window.localStorage.setItem('token', token);

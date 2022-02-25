@@ -27,7 +27,7 @@ export class AuthGuard implements CanActivate {
     | Promise<boolean | UrlTree>
     | boolean
     | UrlTree {
-    /*  return this.authService.user$.pipe(
+    return this.authService.user$.pipe(
       take(1),
       map((user) => {
         console.log('auth guard', user);
@@ -36,11 +36,12 @@ export class AuthGuard implements CanActivate {
       tap((isAuth) => {
         if (!isAuth) this.router.navigate(['/login']);
       })
-    ); */
-    if (!this.authService.isLogged) {
+    );
+
+    /*  if (!this.authService.isLogged) {
       this.router.navigate(['/login']);
       return false;
     }
-    return true;
+    return true; */
   }
 }

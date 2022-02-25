@@ -1,3 +1,11 @@
+$very-light-pink: #c7c7c7;
+$white: #ffffff;
+$text-input-field: #f7f7f7;
+$black: #000000;
+$hospital-green: #acd9b2;
+$dark: #232830;
+$plomo: #797979;
+$red: #d25050;
 .loading-container {
   position: fixed;
   width: 100%;
@@ -5,5 +13,17 @@
   top: 0;
   left: 0;
   z-index: 100;
-  background-color: red;
+  background-color: $white;
+  opacity: 0.9;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+.loading {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
 }
