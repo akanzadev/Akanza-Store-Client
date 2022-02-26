@@ -4,20 +4,47 @@
       <img src="./assets/svg/icon_menu.svg" alt="menu" />
     </button>
     <a href="">
-      <img width="144" height="30" src="./assets/svg/logo_yard_sale.svg" alt="logo" />
+      <img
+        width="144"
+        height="30"
+        src="./assets/svg/logo_yard_sale.svg"
+        alt="logo"
+      />
     </a>
     <a href="">
       <img src="./assets/svg/icon_shopping_cart.svg" alt="logo" />
     </a>
   </div>
   <div class="side-menu" [class.active]="activeMenu">
-    <button (click)="toggleMenu()">Close</button>
-    <ul>
+    <span (click)="toggleMenu()" class="side-menu-close">
+      <img src="assets/svg/close-login.svg" alt="" />
+    </span>
+    <ul class="side-menu-list">
+      <li>CATEGORIES</li>
       <li><a routerLinkActive="active" routerLink="home">All</a></li>
       <li *ngFor="let item of categories">
         <a routerLinkActive="active" [routerLink]="['/category', item.id]">{{
           item.name
         }}</a>
+      </li>
+      <li>
+        <span *ngIf="!profile; else accountData" class="side-menu-user">
+          <a routerLink="login">Log in</a>
+        </span>
+        <ng-template #accountData>
+          <span class="side-menu-account">
+            <ul class="profile-options">
+              <li><a routerLink="profile">My Orders</a></li>
+              <li>
+                <a routerLink="profile">My Account </a>
+              </li>
+            </ul>
+            <div class="profile-buttons">
+              <h3>{{ profile?.email }}</h3>
+              <strong (click)="logout()">Sign out</strong>
+            </div>
+          </span>
+        </ng-template>
       </li>
     </ul>
   </div>
@@ -26,7 +53,12 @@
   <div>
     <nav>
       <a class="logo" href="">
-        <img width="144" height="30" src="./assets/svg/logo_yard_sale.svg" alt="logo" />
+        <img
+          width="144"
+          height="30"
+          src="./assets/svg/logo_yard_sale.svg"
+          alt="logo"
+        />
       </a>
       <ul>
         <li><a routerLinkActive="active" routerLink="home">All</a></li>
@@ -39,12 +71,28 @@
     </nav>
     <div class="info">
       <div class="account">
-        <a *ngIf="!profile; else elseBlock" routerLink="/login">
-          Log In
-        </a>
+        <a *ngIf="!profile; else elseBlock" routerLink="/login"> Log In </a>
         <ng-template #elseBlock>
-          <a routerLink="profile"> {{ profile?.email }}</a>
-          <a (click)="logout()">LogOut</a>
+          <div class="account-data">
+            <div class="account-data-header">
+              <h3>{{ profile?.email }}</h3>
+              <i
+                (click)="showSubMenu()"
+                ngClass="{{
+                  subMenuActive ? 'fas fa-angle-up' : 'fas fa-angle-down'
+                }}"
+              ></i>
+            </div>
+            <ul *ngIf="subMenuActive" class="account-data-body">
+              <li><a routerLink="profile">My orders</a></li>
+              <li>
+                <a routerLink="profile">My account </a>
+              </li>
+              <li>
+                <strong (click)="logout()">Sign out</strong>
+              </li>
+            </ul>
+          </div>
         </ng-template>
       </div>
       <div class="cart">

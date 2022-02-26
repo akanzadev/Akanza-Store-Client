@@ -11,7 +11,7 @@ import { Router } from '@angular/router';
 export class RecoveryFormComponent implements OnInit {
   recoveryForm!: FormGroup;
   sendCheck: boolean = false;
-  goBackSend:boolean = false;
+  goBackSend: boolean = false;
   constructor(
     private formBuild: FormBuilder,
     private authService: AuthService,
@@ -31,6 +31,7 @@ export class RecoveryFormComponent implements OnInit {
         .subscribe({
           next: () => {
             console.log('Email sent');
+            this.goBackSend = false;
             this.sendCheck = true;
           },
           error: (err) => {
@@ -58,7 +59,8 @@ export class RecoveryFormComponent implements OnInit {
     this.router.navigate(['/login']);
   }
 
-  resendEmail(){
+  resendEmail() {
     this.goBackSend = true;
+    this.sendCheck = false;
   }
 }

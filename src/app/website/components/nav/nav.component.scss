@@ -1,3 +1,11 @@
+$very-light-pink: #c7c7c7;
+$white: #ffffff;
+$text-input-field: #f7f7f7;
+$black: #000000;
+$hospital-green: #acd9b2;
+$dark: #232830;
+$plomo: #797979;
+$red: #d25050;
 .show-mobile {
   display: block;
   box-shadow: 0px 2px 5px rgb(black, 0.2);
@@ -9,6 +17,7 @@
     button {
       border: 0;
       background: transparent;
+      cursor: pointer;
     }
   }
   .side-menu {
@@ -18,17 +27,88 @@
     bottom: 0;
     right: 0;
     background: white;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
     transform: translateX(-100%);
     transition: all ease-out 0.5s;
+    padding: 50px 30px;
     &.active {
       transform: translateX(0);
     }
+    .side-menu-close {
+      position: absolute;
+      right: 30px;
+      top: 50px;
+      cursor: pointer;
+    }
+    .side-menu-list {
+      display: flex;
+      flex-wrap: wrap;
+      flex-direction: column;
+      width: 100%;
+      height: 100%;
+      li {
+        font-weight: 800;
+        font-size: 16px;
+        a {
+          display: block;
+          padding: 15px 0px;
+          text-decoration: none;
+          color: black;
+        }
+        &:nth-child(1) {
+          padding-bottom: 20px;
+        }
+        &:last-child {
+          flex: 1;
+          display: flex;
+          justify-content: flex-end;
+          flex-direction: column;
+          .side-menu-user {
+            display: block;
+            a {
+              color: $hospital-green;
+              cursor: pointer;
+            }
+          }
+          .side-menu-account {
+            display: flex;
+            width: 100%;
+            height: 100%;
+            flex-direction: column;
+            margin-top: 30px;
+            border-top: 1px solid $very-light-pink;
+            padding-top: 30px;
+            .profile-options {
+              display: flex;
+              flex-wrap: wrap;
+              flex-direction: column;
+              li {
+                a {
+                  display: block;
+                  padding: 15px 0px;
+                  color: black;
+                  cursor: pointer;
+                }
+              }
+            }
+            .profile-buttons {
+              margin-top: auto;
+              h3 {
+                font-size: 16px;
+                font-weight: normal;
+                margin-bottom: 10px;
+              }
+              strong {
+                color: $hospital-green;
+                cursor: pointer;
+              }
+            }
+          }
+        }
+      }
+    }
   }
 }
-.fixed-nav{
+.fixed-nav {
   position: fixed;
   width: 100%;
   z-index: 10;
@@ -70,12 +150,61 @@
     align-items: center;
     .account {
       margin-right: 0.5em;
-      a {
+      > a {
         color: #acd9b2;
         cursor: pointer;
         font-size: 18px;
         padding: 0px 5px;
         text-decoration: none;
+      }
+      .account-data {
+        padding: 0px 30px 0px 0px;
+        .account-data-header {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 10px;
+          align-items: center;
+          h3 {
+            font-size: 16px;
+          }
+          i {
+            color: gray;
+            font-size: 16px;
+            cursor: pointer;
+          }
+        }
+        .account-data-body {
+          position: absolute;
+          width: 100%;
+          top: 100%;
+          display: flex;
+          flex-direction: column;
+          padding: 25px 0px 0px 0px;
+          gap: 25px;
+          z-index: 30;
+          box-shadow: 0px 2px 5px rgb(black, 0.2);
+          li {
+            a {
+              cursor: pointer;
+              padding: 0px 10px;
+              font-size: 16px;
+              display: block;
+              color: $black;
+              font-weight: 800;
+              text-decoration: none;
+            }
+            &:last-child {
+              border-top: 1px solid $very-light-pink;
+              strong {
+                color: $hospital-green;
+                cursor: pointer;
+                display: block;
+                font-size: 16px;
+                padding: 25px 10px;
+              }
+            }
+          }
+        }
       }
     }
     .cart {

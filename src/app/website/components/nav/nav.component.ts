@@ -16,7 +16,7 @@ export class NavComponent implements OnInit {
   counter = 0;
   profile!: User | null;
   categories!: Category[];
-
+  subMenuActive: boolean = false;
   constructor(
     private storeService: StoreService,
     private authService: AuthService,
@@ -73,5 +73,8 @@ export class NavComponent implements OnInit {
     this.authService.logout();
     this.profile = null;
     this.router.navigate(['/']);
+  }
+  showSubMenu() {
+    this.subMenuActive = !this.subMenuActive;
   }
 }
