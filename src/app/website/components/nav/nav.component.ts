@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { StoreService } from '../../../services/store.service';
 import { AuthService } from '../../../services/auth.service';
 import { User } from '../../../models/auth.model';
@@ -16,7 +16,8 @@ export class NavComponent implements OnInit {
   counter = 0;
   profile!: User | null;
   categories!: Category[];
-  subMenuActive: boolean = false;
+  subMenuActive: boolean = true;
+  /* @ViewChild('sideMenu') sideMenu!: ElementRef; */
   constructor(
     private storeService: StoreService,
     private authService: AuthService,
@@ -36,6 +37,9 @@ export class NavComponent implements OnInit {
 
   toggleMenu() {
     this.activeMenu = !this.activeMenu;
+    /* const sideMenu = this.sideMenu.nativeElement;
+    const a = sideMenu.querySelectorAll('a');
+    console.log(a); */
   }
 
   signIn() {

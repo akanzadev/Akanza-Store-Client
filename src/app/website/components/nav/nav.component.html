@@ -3,7 +3,7 @@
     <button (click)="toggleMenu()">
       <img src="./assets/svg/icon_menu.svg" alt="menu" />
     </button>
-    <a href="">
+    <a routerLinkActive="active" routerLink="home">
       <img
         width="144"
         height="30"
@@ -15,28 +15,37 @@
       <img src="./assets/svg/icon_shopping_cart.svg" alt="logo" />
     </a>
   </div>
-  <div class="side-menu" [class.active]="activeMenu">
+  <div #sideMenu class="side-menu" [class.active]="activeMenu">
     <span (click)="toggleMenu()" class="side-menu-close">
       <img src="assets/svg/close-login.svg" alt="" />
     </span>
     <ul class="side-menu-list">
       <li>CATEGORIES</li>
-      <li><a routerLinkActive="active" routerLink="home">All</a></li>
+      <li>
+        <a (click)="toggleMenu()" routerLinkActive="active" routerLink="home"
+          >All</a
+        >
+      </li>
       <li *ngFor="let item of categories">
-        <a routerLinkActive="active" [routerLink]="['/category', item.id]">{{
-          item.name
-        }}</a>
+        <a
+          (click)="toggleMenu()"
+          routerLinkActive="active"
+          [routerLink]="['/category', item.id]"
+          >{{ item.name }}</a
+        >
       </li>
       <li>
         <span *ngIf="!profile; else accountData" class="side-menu-user">
-          <a routerLink="login">Log in</a>
+          <a (click)="toggleMenu()" routerLink="login">Log in</a>
         </span>
         <ng-template #accountData>
           <span class="side-menu-account">
             <ul class="profile-options">
-              <li><a routerLink="profile">My Orders</a></li>
               <li>
-                <a routerLink="profile">My Account </a>
+                <a (click)="toggleMenu()" routerLink="profile">My Orders</a>
+              </li>
+              <li>
+                <a (click)="toggleMenu()" routerLink="profile">My Account </a>
               </li>
             </ul>
             <div class="profile-buttons">
